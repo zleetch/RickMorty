@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmGlobals:
+  chartHome: ../../../helm/
+helmCharts:
+  - name: rick
+    version: 0.1.0
+    releaseName: rick
+    includeCRDs: true
+    valuesFile: values.yaml
