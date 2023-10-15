@@ -8,7 +8,7 @@ image:
   repository: zltch/morty
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "xxxxxxx"
+  tag: "7f0e723"
 
 imagePullSecrets: []
 nameOverride: ""
