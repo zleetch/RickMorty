@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rick-applicationset
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/zleetch/RickMorty.git
+      revision: HEAD
+      directories:
+      - path: kustomize/rick/overlays/*
+  template:
+    metadata:
+      name: 'rick'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/zleetch/RickMorty.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
