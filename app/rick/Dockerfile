@@ -24,4 +24,6 @@ EXPOSE 8001
 
 USER nonroot:nonroot
 
-CMD ./application
+RUN chmod +x application
+
+CMD ["./application"]
