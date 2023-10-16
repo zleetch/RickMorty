@@ -8,7 +8,7 @@ image:
   repository: zltch/rick
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "f271b0f"
+  tag: "70a2efa"
 
 imagePullSecrets: []
 nameOverride: ""
