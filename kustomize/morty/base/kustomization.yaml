@@ -4,6 +4,7 @@ helmGlobals:
   chartHome: ../../../helm/
 helmCharts:
   - name: morty
+    version: 0.1.0
     releaseName: morty
     includeCRDs: true
     valuesFile: values.yaml

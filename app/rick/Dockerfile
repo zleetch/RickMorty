@@ -24,4 +24,4 @@ EXPOSE 8001
 
 USER nonroot:nonroot
 
-CMD /application
+CMD ./application

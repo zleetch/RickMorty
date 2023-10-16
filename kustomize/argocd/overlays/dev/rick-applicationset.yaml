@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: rick-applicationset
+  namespace: argocd
 spec:
   generators:
   - git:
@@ -11,7 +12,7 @@ spec:
       - path: kustomize/rick/overlays/*
   template:
     metadata:
-      name: 'rick'
+      name: 'rick-{{path.basename}}'
     spec:
       project: default
       source:
@@ -20,8 +21,10 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: default
+        namespace: rick
       syncPolicy:
+        automated:
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true
   syncPolicy:

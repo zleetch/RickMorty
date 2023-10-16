@@ -5,3 +5,4 @@ resources:
   - rick-applicationset.yaml
   - morty-applicationset.yaml
   - applicationproject.yaml
+  - namespace.yaml
