@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prometheus-applicationset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/zleetch/RickMorty.git
+      revision: HEAD
+      directories:
+      - path: kustomize/prometheus/overlays/*
+  template:
+    metadata:
+      name: 'prometheus-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/zleetch/RickMorty.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: prometheus
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
