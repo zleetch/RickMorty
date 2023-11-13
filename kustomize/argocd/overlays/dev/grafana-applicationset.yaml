@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: grafana-applicationset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/zleetch/RickMorty.git
+      revision: HEAD
+      directories:
+      - path: kustomize/grafana/overlays/*
+  template:
+    metadata:
+      name: 'grafana-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/zleetch/RickMorty.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: grafana
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
