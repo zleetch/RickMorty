@@ -4,5 +4,7 @@ resources:
   - ../../base
   - rick-applicationset.yaml
   - morty-applicationset.yaml
+  - prometheus-applicationset.yaml
+  - grafana-applicationset.yaml
   - applicationproject.yaml
   - namespace.yaml
